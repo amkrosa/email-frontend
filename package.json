@@ -9,10 +9,12 @@
     "@mui/material": "^5.6.2",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "cypress": "^9.6.1",
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

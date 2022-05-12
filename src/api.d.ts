@@ -9,3 +9,7 @@ export interface Email {
 export interface GetAllEmails {
     emails: Email[]
 }
+
+export interface GetTemplates {
+    templates: string[]
+}
