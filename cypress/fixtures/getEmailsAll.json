@@ -1,0 +1,25 @@
+{
+  "emails": [
+    {
+      "emailUuid": "5c66fab6-7f8d-4b49-857f-5acc25d36653",
+      "subject": "subject 1",
+      "toEmail": "email1@gmail.com",
+      "dateTimeSent": "2022-04-21 00:01",
+      "html": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <title>Home</title>\r\n</head>\r\n<body>\r\n    <h1>Hello test 1</h1>\r\n</body>\r\n</html>"
+    },
+    {
+      "emailUuid": "9d3fe989-bfa3-4e98-859d-8e534f7ca2ea",
+      "subject": "subject 2",
+      "toEmail": "email2@gmail.com",
+      "dateTimeSent": "2022-04-21 00:02",
+      "html": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <title>Home</title>\r\n</head>\r\n<body>\r\n    <h1>Hello test 2</h1>\r\n</body>\r\n</html>"
+    },
+    {
+      "emailUuid": "93f107d7-5b8a-45b5-84e8-231c160418fa",
+      "subject": "subject 3",
+      "toEmail": "email3@gmail.com",
+      "dateTimeSent": "2022-04-21 00:03",
+      "html": "<!DOCTYPE html><html><head><title>Home</title></head><body><h1>Hello test 3</h1></body></html>"
+    }
+  ]
+}
