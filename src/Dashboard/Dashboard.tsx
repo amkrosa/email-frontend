@@ -11,6 +11,9 @@ import Link from '@mui/material/Link';
 import Emails from './Emails';
 import AppBar from "./AppBar";
 import {GetAllEmails} from "../api";
+import {Fab} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import SendEmailDialog from "./SendEmailDialog";
 
 function Copyright(props: any) {
   return (
@@ -56,11 +59,10 @@ function DashboardContent(props: EmailsProps) {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              {/* Recent Deposits */}
-
-              {/* Recent Emails */}
+            <Grid container spacing={3} >
+                <Grid item container xs={12} alignItems="center" justifyContent="center">
+                    <SendEmailDialog/>
+                </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Emails emails={props.emails}/>

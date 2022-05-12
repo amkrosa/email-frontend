@@ -13,3 +13,9 @@ ReactDOM.render(
   </ThemeProvider>,
   document.querySelector('#root'),
 );
+
+// @ts-ignore
+if (module.hot) {
+    // @ts-ignore
+    module.hot.accept();
+}
