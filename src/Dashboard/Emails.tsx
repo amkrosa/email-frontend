@@ -72,10 +72,10 @@ export default function Emails(props: EmailsProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.emails.emails.map((row, i) => (
+                    {props.emails.emails ? props.emails.emails.map((row, i) => (
                         <Row index={i} emailUuid={row.emailUuid} subject={row.subject} toEmail={row.toEmail}
                              dateTimeSent={row.dateTimeSent} html={row.html}/>
-                    ))}
+                    )) : null}
                 </TableBody>
             </Table>
         </React.Fragment>
