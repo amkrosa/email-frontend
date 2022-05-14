@@ -4,15 +4,9 @@ import {getHtmlBy, getRows} from "../pages/EmailList";
 describe("Recent emails - displays email list", () => {
     let rows
     beforeEach(() => {
-        cy.intercept(
-            {
-                method: 'GET',
-                url: '**/email/all',
-            },
-            {
-                fixture: 'getEmailsAll.json'
-            } // and force the response to be: []
-        ).as('getAllEmails') // and assign an alias
+        cy.interceptGetAllEmails()
+        cy.interceptGetTemplates()
+        localStorage.setItem("token", "sometoken")
         cy.visit('http://localhost:3000/')
         cy.wait('@getAllEmails')
         rows = getRows()
