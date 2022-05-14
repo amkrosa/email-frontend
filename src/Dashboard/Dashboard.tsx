@@ -10,9 +10,7 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import Emails from './Emails';
 import AppBar from "./AppBar";
-import {GetAllEmails} from "../api";
-import {Fab} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import {GetAllEmails, GetTemplates} from "../api";
 import SendEmailDialog from "./SendEmailDialog";
 
 function Copyright(props: any) {
@@ -32,9 +30,15 @@ export interface EmailsProps {
     emails: GetAllEmails
 }
 
+export interface DashboardProps {
+    emails: GetAllEmails
+    templates: GetTemplates
+    setHasSentEmail: any
+}
+
 const mdTheme = createTheme();
 
-function DashboardContent(props: EmailsProps) {
+function DashboardContent(props: DashboardProps) {
   const [isOpen, setIsOpen] = React.useState(true);
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -61,7 +65,7 @@ function DashboardContent(props: EmailsProps) {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3} >
                 <Grid item container xs={12} alignItems="center" justifyContent="center">
-                    <SendEmailDialog/>
+                    <SendEmailDialog setHasSentEmail={props.setHasSentEmail} templates={props.templates}/>
                 </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
@@ -77,6 +81,6 @@ function DashboardContent(props: EmailsProps) {
   );
 }
 
-export default function Dashboard(props: EmailsProps) {
-  return <DashboardContent emails={props.emails} />;
+export default function Dashboard(props: DashboardProps) {
+  return <DashboardContent setHasSentEmail={props.setHasSentEmail} templates={props.templates} emails={props.emails} />;
 }

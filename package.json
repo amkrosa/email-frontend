@@ -12,6 +12,7 @@
     "cypress": "^9.6.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "latest",
     "typescript": "latest",
     "web-vitals": "^2.1.4"

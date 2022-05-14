@@ -11,36 +11,17 @@ import AddIcon from "@mui/icons-material/Add";
 import {ChangeEvent, useEffect, useState} from "react";
 import {GetAllEmails, GetTemplates} from "../api";
 import {template} from "./templates";
+import {get, post} from "../api/rest";
 
-export default function SendEmailDialog() {
+interface SendEmailDialogProps {
+    templates: GetTemplates;
+    setHasSentEmail: any
+}
+
+export default function SendEmailDialog(props: SendEmailDialogProps) {
     const [open, setOpen] = React.useState(false);
-    const [data, setData] = useState<GetTemplates>({templates: []});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await fetch(
-                    `http://localhost:8080/email/templates`
-                );
-                if (!response.ok) {
-                    throw new Error(
-                        `This is an HTTP error: The status is ${response.status}`
-                    );
-                }
-                let actualData = await response.json();
-                setData(actualData);
-                setError(null);
-            } catch (err: any) {
-                setError(err.message);
-                setData({templates: []});
-            } finally {
-                setLoading(false);
-            }
-        }
-        getData()
-    }, [])
+    const templates = props.templates.templates
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -78,29 +59,14 @@ export default function SendEmailDialog() {
             template,
             attributes: {...templateAttributes}
         }
-        const response = await fetch("http://localhost:8080/email/send", {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(body) // body data type must match "Content-Type" header
-        });
-        if (!response.ok) {
-            throw new Error(
-                `This is an HTTP error: The status is ${response.status}`
-            );
-        }
+        post("/email/send", body, localStorage.getItem("token"))
+        props.setHasSentEmail(body)
         handleClose()
     }
 
     return (
         <div>
-            <Fab color="primary" variant="extended" onClick={handleClickOpen}>
+            <Fab data-testid="test-openSendEmailDialog" color="primary" variant="extended" onClick={handleClickOpen}>
                 Add <AddIcon/>
             </Fab>
             <Dialog
@@ -137,9 +103,10 @@ export default function SendEmailDialog() {
                         id="template"
                         onChange={handleChange}
                         placeholder="Template"
+                        defaultValue={templates[0]}
                         autoWidth
                     >
-                        {data.templates.map(template => (<MenuItem value={template}>{template}</MenuItem>))}
+                        {templates.map(template => (<MenuItem value={template}>{template}</MenuItem>))}
                     </Select>
                     {selectedTemplate === "" ? null : Object.entries(template(selectedTemplate)).map(([field, name]) => (
                         <TextField
@@ -154,8 +121,8 @@ export default function SendEmailDialog() {
                     ))}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={sendEmail}>Send</Button>
+                    <Button data-testid='test-cancel' onClick={handleClose}>Cancel</Button>
+                    <Button data-testid='test-submit' onClick={sendEmail}>Send</Button>
                 </DialogActions>
             </Dialog>
         </div>
