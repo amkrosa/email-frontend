@@ -1,4 +1,4 @@
-const url = process.env.API_URL || 'http://localhost:8080';
+let url = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 export const get = async (path: string, token: string | null = null, setData: any & null = null, setError: any & null, setLoading: any & null) => {
     let actualData;
