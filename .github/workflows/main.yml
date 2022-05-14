@@ -18,6 +18,8 @@ jobs:
 
   deploy:
     runs-on: self-hosted
+    needs:
+      - cypress-run
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Development Code
@@ -31,7 +33,7 @@ jobs:
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         env:
-          API_URL: ${{ secrets.DEV_API_URL }}
+          REACT_APP_API_URL: ${{ secrets.DEV_API_URL }}
         with:
           args: deploy --dir=build --prod
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
