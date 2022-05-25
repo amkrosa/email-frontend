@@ -14,7 +14,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
-          start: npm start
+          start: PORT=3000 npm start
 
   deploy:
     runs-on: self-hosted
