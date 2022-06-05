@@ -59,7 +59,7 @@ export default function SendEmailDialog(props: SendEmailDialogProps) {
             template,
             attributes: {...templateAttributes}
         }
-        post("/email/send", body, localStorage.getItem("token"))
+        await post("/email/send", body, localStorage.getItem("token"))
         props.setHasSentEmail(body)
         handleClose()
     }
